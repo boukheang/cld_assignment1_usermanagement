@@ -483,17 +483,37 @@ doc.save(DOCX_OUT_PROJ)
 print(f"Saved DOCX successfully to: {DOCX_OUT_ROOT}")
 print(f"Saved DOCX copy to: {DOCX_OUT_PROJ}")
 
-# Convert to PDF using win32com
+# Convert to PDF using win32com ExportAsFixedFormat (Full Print Quality, Lossless Images)
 try:
     import win32com.client
     word = win32com.client.Dispatch('Word.Application')
     word.Visible = False
     docx_obj = word.Documents.Open(DOCX_OUT_ROOT)
-    docx_obj.SaveAs(PDF_OUT_ROOT, FileFormat=17)
-    docx_obj.SaveAs(PDF_OUT_PROJ, FileFormat=17)
+    
+    # Export with OptimizeFor=0 (wdExportOptimizeForPrint) to prevent image compression
+    docx_obj.ExportAsFixedFormat(
+        OutputFileName=PDF_OUT_ROOT,
+        ExportFormat=17,       # wdExportFormatPDF
+        OpenAfterExport=False,
+        OptimizeFor=0,         # wdExportOptimizeForPrint (Preserves full image resolution!)
+        CreateBookmarks=1,     # wdExportCreateHeadingBookmarks
+        DocStructureTags=True,
+        BitmapMissingFonts=True,
+        UseISO19005_1=False
+    )
+    docx_obj.ExportAsFixedFormat(
+        OutputFileName=PDF_OUT_PROJ,
+        ExportFormat=17,
+        OpenAfterExport=False,
+        OptimizeFor=0,
+        CreateBookmarks=1,
+        DocStructureTags=True,
+        BitmapMissingFonts=True,
+        UseISO19005_1=False
+    )
     docx_obj.Close()
     word.Quit()
-    print(f"Saved PDF successfully to: {PDF_OUT_ROOT}")
-    print(f"Saved PDF copy to: {PDF_OUT_PROJ}")
+    print(f"Saved Full Print Quality PDF successfully to: {PDF_OUT_ROOT}")
+    print(f"Saved Full Print Quality PDF copy to: {PDF_OUT_PROJ}")
 except Exception as e:
     print(f"Word COM conversion note: {e}")
