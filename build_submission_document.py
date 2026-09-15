@@ -3,12 +3,14 @@ import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.oxml import OxmlElement, parse_xml
-from docx.oxml.ns import nsdecls, qn
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
 
 SCREENSHOTS_DIR = r"D:\Agent\cld\University_User_Management_Platform\screenshots"
 DOCX_OUT_ROOT = r"D:\Agent\cld\Role_Based_User_Management_Submission.docx"
 DOCX_OUT_PROJ = r"D:\Agent\cld\University_User_Management_Platform\Role_Based_User_Management_Submission.docx"
+PDF_OUT_ROOT = r"D:\Agent\cld\Role_Based_User_Management_Submission.pdf"
+PDF_OUT_PROJ = r"D:\Agent\cld\University_User_Management_Platform\Role_Based_User_Management_Submission.pdf"
 
 doc = docx.Document()
 
@@ -38,7 +40,7 @@ def add_header_block():
 
     p_student = doc.add_paragraph()
     p_student.paragraph_format.space_before = Pt(4)
-    p_student.paragraph_format.space_after = Pt(12)
+    p_student.paragraph_format.space_after = Pt(10)
     r3 = p_student.add_run("Try Boukheang\n")
     set_run_font(r3, "Calibri", 13, bold=True, color_rgb=(0, 0, 0))
     r4 = p_student.add_run("ID: 2024476\n")
@@ -57,11 +59,9 @@ def add_callout_box(text, bold_prefix="Scenario: "):
     cell = table.cell(0, 0)
     cell.width = Inches(7.5)
     
-    # Light blue background fill
     shading = parse_xml(r'<w:shd {} w:fill="F0F4F8"/>'.format(nsdecls('w')))
     cell._tc.get_or_add_tcPr().append(shading)
     
-    # Left thick border
     borders = parse_xml(r'''
         <w:tcBorders {} >
             <w:top w:val="none"/>
@@ -88,14 +88,6 @@ def add_heading_1(text):
     p.paragraph_format.keep_with_next = True
     r = p.add_run(text)
     set_run_font(r, "Calibri", 13.5, bold=True, color_rgb=(0, 51, 102))
-
-def add_heading_2(text):
-    p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(12)
-    p.paragraph_format.space_after = Pt(4)
-    p.paragraph_format.keep_with_next = True
-    r = p.add_run(text)
-    set_run_font(r, "Calibri", 11.5, bold=True, color_rgb=(0, 102, 153))
 
 def add_body_p(text, bold_lead=""):
     p = doc.add_paragraph()
@@ -136,7 +128,7 @@ add_header_block()
 
 add_callout_box(
     "A university Central Identity and User Management Platform developed as independent microservices "
-    "communicating through an API Gateway with MongoDB Atlas persistence. Features two user classes: User (students/staff managing own profile) "
+    "communicating through an API Gateway with MongoDB Atlas persistence. Features two user roles: User (students/staff managing own profile) "
     "and Admin (administrators managing accounts). Strictly enforces mutual exclusion: Users can NEVER access Admin APIs, "
     "and Admins can NEVER access User APIs.",
     bold_prefix="Real-Life Scenario & System Architecture: "
@@ -175,189 +167,303 @@ for row_idx, row_data in enumerate(data, start=1):
         r = p.add_run(text)
         set_run_font(r, "Calibri", 9.5, bold=(col_idx==0), color_rgb=(30, 30, 30))
 
-doc.add_paragraph().paragraph_format.space_after = Pt(10)
+doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
-# TASK 1 & 2
-add_heading_1("Task 1 & Task 2: 5 Microservices Setup & Database Connection Verification")
+# 1. TASK 1
+add_heading_1("Task 1 – Five Microservices Running")
 add_body_p(
-    "Created 5 independent microservices (API Gateway, Registration, Login, Admin, and User services). "
-    "Configured reusable dbconnect.js in all data-handling microservices establishing stable connection to MongoDB Atlas "
-    "with connection pooling, ping health check verification, and environment variable configuration.",
-    bold_lead="Implementation Overview:"
+    "All five independent microservices (API Gateway on port 4000, Registration Service on port 5001, "
+    "Login Service on port 5002, Admin Service on port 5003, and User Service on port 5004) started and running simultaneously. "
+    "TCP port listener verification confirms each process is listening on its designated port.",
+    bold_lead="Microservices Orchestration:"
 )
 add_image_with_caption(
     "task1_2_microservices_running.png",
-    "Figure 1: PowerShell Orchestrator - All 5 Microservices running simultaneously on ports 4000, 5001, 5002, 5003, and 5004 with MongoDB Atlas connected."
+    "Evidence 1: PowerShell Orchestrator - All 5 Microservices running simultaneously on ports 4000, 5001, 5002, 5003, and 5004."
 )
 
-# TASK 3
-add_heading_1("Task 3: MongoDB User Model Implementation (user_schema.js)")
+# 2. TASK 2
+add_heading_1("Task 2 – MongoDB Database Connection")
 add_body_p(
-    "Designed and implemented the Mongoose User Model matching the exact schema requirements. "
-    "Fields include _id (ObjectId), name, email (unique index, lowercase), password (bcrypt hashed), "
-    "role (enum: 'admin', 'user'), phone, and automatic timestamps (createdAt, updatedAt).",
-    bold_lead="Schema Specification:"
+    "Mongoose database connection module (dbconnect.js) implemented with connection pooling, retry options, "
+    "and deployment ping command. Successful execution confirms active connection to MongoDB Atlas database (clusterdb).",
+    bold_lead="Database Connectivity:"
+)
+add_image_with_caption(
+    "task2_dbconnect.png",
+    "Evidence 2: VS Code editor showing dbconnect.js and terminal verification showing successful MongoDB Atlas connection."
+)
+
+# 3. TASK 3
+add_heading_1("Task 3 – MongoDB User Model")
+add_body_p(
+    "Mongoose User schema (user_schema.js) created according to specification with _id, name, email (unique, lowercase), "
+    "password (bcrypt hashed), role (enum: ['admin', 'user']), phone, and automatic timestamps (createdAt, updatedAt).",
+    bold_lead="Schema Definition:"
 )
 add_image_with_caption(
     "task3_user_model_code.png",
-    "Figure 2: VS Code Editor - Mongoose User Model Schema (user_schema.js) with required fields, validation, and timestamps."
+    "Evidence 3: VS Code editor - MongoDB User Model Schema (user_schema.js) with required fields, validation, and timestamps."
 )
 
-# TASK 4 & 7
-add_heading_1("Task 4 & Task 7: API Gateway Microservice & JWT Role-Based Routing Guards")
+# 4. TASK 4 & 7
+add_heading_1("Task 4 – API Gateway Routing and Authentication")
 add_body_p(
-    "The API Gateway acts as the single entry point for all client requests. Implements http-proxy reverse routing "
-    "and strict JWT token verification middleware. Requests lacking a token or containing invalid/expired tokens are rejected. "
-    "Crucially, role-based authorization enforces that ordinary users are blocked from Admin APIs (403 Forbidden) "
-    "and administrators are blocked from User APIs (403 Forbidden).",
-    bold_lead="Gateway & Security Architecture:"
+    "API Gateway (api-gateway.js) implemented as the single entry point on port 4000 using http-proxy reverse routing. "
+    "Enforces strict JWT token validation and role-based access control (RBAC): ordinary users cannot access /admin/*, "
+    "and administrators cannot access /user/*.",
+    bold_lead="Gateway Routing & Security Architecture:"
 )
 add_image_with_caption(
     "task4_7_apigateway_code.png",
-    "Figure 3: VS Code Editor - API Gateway source code (api-gateway.js) displaying JWT verification, role guard middleware, and microservice reverse proxy routes."
+    "Evidence 4: VS Code editor - API Gateway source code (api-gateway.js) displaying JWT verification, role guard middleware, and reverse proxy routes."
 )
 
-# TASK 5
-add_heading_1("Task 5: Registration Microservice API & Database Verification")
+# 5. TASK 5A
+add_heading_1("Task 5 – Successful User Registration")
 add_body_p(
-    "Registration API endpoint POST /register/userregister routed through API Gateway to Port 5001. "
-    "Validates input, enforces unique email constraint, securely hashes passwords using bcrypt (10 rounds), "
-    "and saves documents into MongoDB Atlas.",
-    bold_lead="Registration Functionality:"
+    "Client registers a new student account via POST http://localhost:4000/register/userregister through the API Gateway. "
+    "Registration service validates input, securely hashes the password with bcrypt, stores the document in MongoDB, and returns Status 201 Created.",
+    bold_lead="Registration Workflow:"
 )
-add_heading_2("5.1: Student User Registration (Role: user)")
 add_image_with_caption(
     "task5_1_register_user.png",
-    "Figure 4: Postman - POST http://localhost:4000/register/userregister registering student account (Status 201 Created)."
+    "Evidence 5: Postman - POST http://localhost:4000/register/userregister successfully registering student account (Status 201 Created)."
 )
-add_heading_2("5.2: Administrator Account Registration (Role: admin)")
+
+# Extra: Admin Registration
+add_body_p(
+    "Admin account registered via POST http://localhost:4000/register/userregister with role 'admin' for subsequent administrative operations.",
+    bold_lead="Admin Account Setup:"
+)
 add_image_with_caption(
     "task5_2_register_admin.png",
-    "Figure 5: Postman - POST http://localhost:4000/register/userregister registering administrative account (Status 201 Created)."
+    "Evidence 5b: Postman - POST http://localhost:4000/register/userregister successfully registering administrator account (Status 201 Created)."
 )
-add_heading_2("5.3: Duplicate Email Prevention Test")
+
+# 6. TASK 5B
+add_heading_1("Task 5 – Duplicate Email Validation")
+add_body_p(
+    "Attempting to register with an email address that already exists in MongoDB is immediately rejected with Status 400 Bad Request "
+    "and error message 'Duplicate email not accepted. A user with this email address already exists.'",
+    bold_lead="Duplicate Prevention:"
+)
 add_image_with_caption(
     "task5_3_duplicate_email.png",
-    "Figure 6: Postman - Re-registering with existing email rejected with Status 400 Bad Request ('Duplicate email not accepted')."
+    "Evidence 6: Postman - Duplicate email rejected with Status 400 Bad Request ('Duplicate email not accepted')."
 )
-add_heading_2("5.4: MongoDB Atlas Database Verification")
+
+# 7. TASK 5C
+add_heading_1("Task 5 – MongoDB User Record with Hashed Password")
+add_body_p(
+    "MongoDB Atlas collection (clusterdb.users) inspection showing the stored student and administrator documents. "
+    "Passwords are never stored in plain text and are securely hashed with bcrypt ($2a$10$...).",
+    bold_lead="MongoDB Persistence Verification:"
+)
 add_image_with_caption(
     "task5_4_mongodb_users.png",
-    "Figure 7: MongoDB Compass / Atlas Data View - Registered users stored in clusterdb.users showing bcrypt password hashes."
+    "Evidence 7: MongoDB Compass / Atlas Data View - Registered user documents showing bcrypt password hashes."
 )
 
-# TASK 6
-add_heading_1("Task 6: Login Microservice API & JWT Token Issuance")
+# 8. TASK 6A
+add_heading_1("Task 6 – Successful User Login and JWT Generation")
 add_body_p(
-    "Login API endpoint POST /auth/login routed through API Gateway to Port 5002. "
-    "Validates email, password (via bcrypt.compare), and requested role against MongoDB. "
-    "Upon successful validation, issues a signed JWT containing user ID, email, and role valid for 24 hours.",
+    "User logs in via POST http://localhost:4000/auth/login through the API Gateway with valid email, password, and role. "
+    "Login service verifies credentials against MongoDB and returns Status 200 OK along with a signed 24-hour JWT token.",
     bold_lead="Authentication Workflow:"
 )
-add_heading_2("6.1: Valid Student Login (Returns JWT)")
 add_image_with_caption(
     "task6_1_user_login.png",
-    "Figure 8: Postman - POST http://localhost:4000/auth/login for user returning 200 OK and signed JWT token."
-)
-add_heading_2("6.2: Valid Administrator Login (Returns JWT)")
-add_image_with_caption(
-    "task6_2_admin_login.png",
-    "Figure 9: Postman - POST http://localhost:4000/auth/login for admin returning 200 OK and signed JWT token."
-)
-add_heading_2("6.3: Login Attempt with Incorrect Password")
-add_image_with_caption(
-    "task6_3_invalid_password.png",
-    "Figure 10: Postman - Incorrect password rejected with Status 401 Unauthorized ('Password does not match')."
-)
-add_heading_2("6.4: Login Attempt with Role Mismatch")
-add_image_with_caption(
-    "task6_4_invalid_role.png",
-    "Figure 11: Postman - Student account attempting admin login rejected with Status 403 Forbidden ('Role mismatch')."
+    "Evidence 8: Postman - POST http://localhost:4000/auth/login returning Status 200 OK and signed JWT token for student user."
 )
 
-# TASK 8
-add_heading_1("Task 8: Admin Microservice APIs")
+# Extra: Admin Login
 add_body_p(
-    "Admin Microservice (Port 5003) provides administrative user management capabilities. "
-    "Access is strictly protected by the API Gateway requiring valid Administrator JWT tokens.",
-    bold_lead="Admin Capabilities:"
+    "Administrator logs in via POST http://localhost:4000/auth/login returning Status 200 OK and signed Admin JWT token.",
+    bold_lead="Admin Authentication:"
 )
-add_heading_2("8.1: View All Users Information")
 add_image_with_caption(
-    "task8_1_admin_viewalluser.png",
-    "Figure 12: Postman - GET http://localhost:4000/admin/viewalluser with Admin Token returning all registered users (Status 200 OK)."
+    "task6_2_admin_login.png",
+    "Evidence 8b: Postman - POST http://localhost:4000/auth/login returning Status 200 OK and signed Admin JWT token."
 )
-add_heading_2("8.2: Search User by Query Parameter (Found vs Not Found)")
+
+# 9. TASK 6B
+add_heading_1("Task 6 – Invalid Password")
+add_body_p(
+    "Login attempt with an incorrect password is rejected with Status 401 Unauthorized ('Invalid credentials: Password does not match').",
+    bold_lead="Password Verification:"
+)
+add_image_with_caption(
+    "task6_3_invalid_password.png",
+    "Evidence 9: Postman - Incorrect password rejected with Status 401 Unauthorized ('Password does not match')."
+)
+
+# 10. TASK 6C
+add_heading_1("Task 6 – Invalid Role")
+add_body_p(
+    "Login attempt where the requested role does not match the account's registered role in MongoDB is rejected with Status 403 Forbidden ('Invalid role: Access denied. Account is registered as user, but login requested as admin').",
+    bold_lead="Role Verification:"
+)
+add_image_with_caption(
+    "task6_4_invalid_role.png",
+    "Evidence 10: Postman - Student account attempting admin login rejected with Status 403 Forbidden ('Role mismatch')."
+)
+
+# 11. TASK 7 (Summary)
+add_heading_1("Task 7 – JWT Authentication and Role-Based API Routing")
+add_body_p(
+    "JWT Authentication and RBAC guards implemented at the API Gateway level. Requests to /admin/* are validated to require decoded.role === 'admin'. "
+    "Requests to /user/* are validated to require decoded.role === 'user'. Any violation generates immediate 401/403 responses before reaching the microservices.",
+    bold_lead="Role-Based Security Enforcement:"
+)
+
+# 12. TASK 8A
+add_heading_1("Task 8 – Admin Search User (User Found)")
+add_body_p(
+    "Administrator searches for a student user by query parameter (GET http://localhost:4000/admin/searchuser?email=...) with Admin Bearer Token. "
+    "Admin service queries MongoDB and returns Status 200 OK with the matched user document.",
+    bold_lead="Admin Search API:"
+)
 add_image_with_caption(
     "task8_2_admin_search_found.png",
-    "Figure 13: Postman - GET http://localhost:4000/admin/searchuser?email=... returning matching user document (Status 200 OK)."
+    "Evidence 11: Postman - GET http://localhost:4000/admin/searchuser?email=... returning matching user document (Status 200 OK)."
+)
+
+# 13. TASK 8B
+add_heading_1("Task 8 – Admin Search User (User Not Found)")
+add_body_p(
+    "Searching for a non-existent user returns Status 404 Not Found with error message 'User not found with the specified search criteria.'",
+    bold_lead="Admin Search Handling:"
 )
 add_image_with_caption(
     "task8_3_admin_search_notfound.png",
-    "Figure 14: Postman - GET http://localhost:4000/admin/searchuser?email=ghost... returning Status 404 Not Found."
+    "Evidence 12: Postman - GET http://localhost:4000/admin/searchuser?email=ghost... returning Status 404 Not Found."
 )
-add_heading_2("8.3: Delete User by Email ID")
+
+# 14. TASK 8 - VIEW ALL
+add_heading_1("Task 8 – View All Users")
+add_body_p(
+    "Administrator retrieves all registered users via GET http://localhost:4000/admin/viewalluser with Admin Bearer Token. "
+    "Admin service returns Status 200 OK with all user accounts (passwords excluded for security).",
+    bold_lead="Admin View All API:"
+)
+add_image_with_caption(
+    "task8_1_admin_viewalluser.png",
+    "Evidence 13: Postman - GET http://localhost:4000/admin/viewalluser with Admin Token returning all registered users (Status 200 OK)."
+)
+
+# 15. TASK 8 - DELETE USER
+add_heading_1("Task 8 – Delete User")
+add_body_p(
+    "Administrator deletes a user account via DELETE http://localhost:4000/admin/deluser?email=... with Admin Bearer Token. "
+    "Admin service removes the user document from MongoDB and returns Status 200 OK.",
+    bold_lead="Admin Delete API:"
+)
 add_image_with_caption(
     "task8_4_admin_delete_user.png",
-    "Figure 15: Postman - DELETE http://localhost:4000/admin/deluser?email=... successfully deleting user (Status 200 OK)."
+    "Evidence 14: Postman - DELETE http://localhost:4000/admin/deluser?email=... successfully deleting user (Status 200 OK)."
 )
 
-# TASK 9
-add_heading_1("Task 9: User Microservice APIs")
+# 16. TASK 9A
+add_heading_1("Task 9 – View User Profile Before Update")
 add_body_p(
-    "User Microservice (Port 5004) enables students/staff to view and update their own profiles. "
-    "The API Gateway authenticates the User token and injects the verified identity headers.",
-    bold_lead="User Profile Operations:"
+    "Student views personal profile via GET http://localhost:4000/user/viewprofile using User Bearer Token. "
+    "API Gateway passes identity to User Microservice, returning Status 200 OK with initial profile details.",
+    bold_lead="User Profile View:"
 )
-add_heading_2("9.1: View Own Profile (Before Update)")
 add_image_with_caption(
     "task9_1_view_profile_before.png",
-    "Figure 16: Postman - GET http://localhost:4000/user/viewprofile retrieving original user profile (Status 200 OK)."
+    "Evidence 15: Postman - GET http://localhost:4000/user/viewprofile retrieving original user profile (Status 200 OK)."
 )
-add_heading_2("9.2: Update Profile (PUT /user/updateprofile)")
+
+# 17. TASK 9B
+add_heading_1("Task 9 – Update User Profile")
+add_body_p(
+    "Student updates name and phone number via PUT http://localhost:4000/user/updateprofile using User Bearer Token. "
+    "User Microservice updates the document in MongoDB and returns Status 200 OK with updated profile information.",
+    bold_lead="User Profile Update:"
+)
 add_image_with_caption(
     "task9_2_update_profile.png",
-    "Figure 17: Postman - PUT http://localhost:4000/user/updateprofile updating user name and phone (Status 200 OK)."
+    "Evidence 16: Postman - PUT http://localhost:4000/user/updateprofile updating user name and phone (Status 200 OK)."
 )
-add_heading_2("9.3: View Own Profile (After Update)")
+
+# Extra: View Profile After Update
+add_body_p(
+    "Student retrieves profile again via GET http://localhost:4000/user/viewprofile using User Bearer Token, confirming updated profile details (name and phone) are returned with Status 200 OK.",
+    bold_lead="User Profile Verification After Update:"
+)
 add_image_with_caption(
     "task9_3_view_profile_after.png",
-    "Figure 18: Postman - GET http://localhost:4000/user/viewprofile confirming updated profile values in MongoDB (Status 200 OK)."
+    "Evidence 16b: Postman - GET http://localhost:4000/user/viewprofile verifying updated profile data (Status 200 OK)."
 )
 
-# TASK 10
-add_heading_1("Task 10: Security & Gatekeeper Tests (Postman With Clear URL & Output)")
+# 18. TASK 9C
+add_heading_1("Task 9 – MongoDB User Profile After Update")
 add_body_p(
-    "Demonstration of the four mandatory security gatekeeper test cases proving comprehensive protection at the API Gateway:",
-    bold_lead="Access Control Verification:"
+    "MongoDB Atlas collection inspection confirming the profile was modified in the database: name changed to 'Try Boukheang (Updated Profile)', "
+    "phone changed to '+85599887766', and updatedAt timestamp automatically refreshed.",
+    bold_lead="Database Verification After Update:"
 )
-add_heading_2("10.a: Access Protected API Without Token")
+add_image_with_caption(
+    "task9_4_mongodb_profile_updated.png",
+    "Evidence 17: MongoDB Compass / Atlas Data View - User profile in clusterdb.users showing updated name, phone, and refreshed timestamp."
+)
+
+# 19. TASK 10A
+add_heading_1("Task 10(a) – Access Admin API Without Token")
+add_body_p(
+    "Client attempts to access protected route GET http://localhost:4000/admin/viewalluser without an Authorization header. "
+    "API Gateway intercepts and immediately rejects the request with Status 401 Unauthorized ('Access Denied: No token provided').",
+    bold_lead="Security Test 10(a):"
+)
 add_image_with_caption(
     "task10_a_without_token.png",
-    "Figure 19: Postman - GET /admin/viewalluser without Authorization header rejected with Status 401 Unauthorized."
-)
-add_heading_2("10.b: Access Protected API With Wrong / Malformed Token")
-add_image_with_caption(
-    "task10_b_wrong_token.png",
-    "Figure 20: Postman - Access with invalid token rejected with Status 403 Forbidden ('Invalid token')."
-)
-add_heading_2("10.c: Admin Token Attempting to Access User API (Forbidden)")
-add_image_with_caption(
-    "task10_c_admin_access_user_forbidden.png",
-    "Figure 21: Postman - Admin token attempting GET /user/viewprofile rejected with Status 403 Forbidden ('Admins cannot access User APIs')."
-)
-add_heading_2("10.d: User Token Attempting to Access Admin API (Forbidden)")
-add_image_with_caption(
-    "task10_d_user_access_admin_forbidden.png",
-    "Figure 22: Postman - User token attempting GET /admin/viewalluser rejected with Status 403 Forbidden ('Users cannot access Admin APIs')."
+    "Evidence 18: Postman - Protected endpoint accessed without Authorization header rejected with Status 401 Unauthorized."
 )
 
-# TASK 11
-add_heading_1("Task 11: GitHub Repository & Deployment Details")
+# 20. TASK 10B
+add_heading_1("Task 10(b) – Access API Using Invalid JWT")
 add_body_p(
-    "The complete codebase including all 5 microservices, schemas, environment configurations, and orchestration scripts "
-    "is version-controlled and pushed to the public GitHub repository:",
-    bold_lead="Repository Details:"
+    "Client attempts to access protected route using a fabricated or invalid token (Authorization: Bearer invalid.token.12345). "
+    "API Gateway verifies token signature, detects malformed token, and rejects with Status 403 Forbidden ('Access Denied: Invalid token').",
+    bold_lead="Security Test 10(b):"
+)
+add_image_with_caption(
+    "task10_b_wrong_token.png",
+    "Evidence 19: Postman - Protected endpoint accessed with invalid JWT rejected with Status 403 Forbidden."
+)
+
+# 21. TASK 10C
+add_heading_1("Task 10(c) – Admin Token Attempting to Access User API")
+add_body_p(
+    "Client uses an Administrator JWT token to access the User-only endpoint GET http://localhost:4000/user/viewprofile. "
+    "API Gateway enforces role mutual exclusion and rejects the request with Status 403 Forbidden ('Access Denied: User privileges required. Administrators are not permitted to access User APIs').",
+    bold_lead="Security Test 10(c):"
+)
+add_image_with_caption(
+    "task10_c_admin_access_user_forbidden.png",
+    "Evidence 20: Postman - Administrator token attempting to access User API rejected with Status 403 Forbidden."
+)
+
+# 22. TASK 10D
+add_heading_1("Task 10(d) – User Token Attempting to Access Admin API")
+add_body_p(
+    "Client uses an Ordinary User (Student) JWT token to access the Administrative endpoint GET http://localhost:4000/admin/viewalluser. "
+    "API Gateway enforces role mutual exclusion and rejects the request with Status 403 Forbidden ('Access Denied: Admin privileges required. Ordinary users are not permitted to access Admin APIs').",
+    bold_lead="Security Test 10(d):"
+)
+add_image_with_caption(
+    "task10_d_user_access_admin_forbidden.png",
+    "Evidence 21: Postman - Ordinary user token attempting to access Admin API rejected with Status 403 Forbidden."
+)
+
+# 23. TASK 11
+add_heading_1("Task 11 – Public GitHub Repository")
+add_body_p(
+    "The complete source code including all 5 microservices, schemas, environment templates, and automated test scripts "
+    "is published in a public GitHub repository. Sensitive files (.env, node_modules) are properly excluded via .gitignore.",
+    bold_lead="Public Repository Link:"
 )
 
 p_link = doc.add_paragraph()
@@ -366,8 +472,28 @@ set_run_font(r_link_label, "Calibri", 11, bold=True, color_rgb=(0, 51, 102))
 r_url = p_link.add_run("https://github.com/boukheang/cld_assignment1_usermanagement.git")
 set_run_font(r_url, "Calibri", 11, bold=True, color_rgb=(0, 102, 204))
 
-# Save docx files
+add_image_with_caption(
+    "task11_github_repo.png",
+    "Evidence 22: GitHub Web View - Public repository boukheang/cld_assignment1_usermanagement showing the 5 microservices and project files."
+)
+
+# Save DOCX files
 doc.save(DOCX_OUT_ROOT)
 doc.save(DOCX_OUT_PROJ)
 print(f"Saved DOCX successfully to: {DOCX_OUT_ROOT}")
 print(f"Saved DOCX copy to: {DOCX_OUT_PROJ}")
+
+# Convert to PDF using win32com
+try:
+    import win32com.client
+    word = win32com.client.Dispatch('Word.Application')
+    word.Visible = False
+    docx_obj = word.Documents.Open(DOCX_OUT_ROOT)
+    docx_obj.SaveAs(PDF_OUT_ROOT, FileFormat=17)
+    docx_obj.SaveAs(PDF_OUT_PROJ, FileFormat=17)
+    docx_obj.Close()
+    word.Quit()
+    print(f"Saved PDF successfully to: {PDF_OUT_ROOT}")
+    print(f"Saved PDF copy to: {PDF_OUT_PROJ}")
+except Exception as e:
+    print(f"Word COM conversion note: {e}")
