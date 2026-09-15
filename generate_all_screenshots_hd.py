@@ -666,8 +666,8 @@ atlas_users_html = """
     <div style="font-weight:700;color:#00684a;margin-bottom:6px;">Document 1: Registered Student User (Password Hashed with bcrypt)</div>
     {<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">_id:</span> <span class="atlas-id">ObjectId('6aa7b06afbfc8e049c9d5789')</span>,<br>
-    &nbsp;&nbsp;<span style="color:#5c6c75;">name:</span> <span class="atlas-str">"Try Boukheang"</span>,<br>
-    &nbsp;&nbsp;<span style="color:#5c6c75;">email:</span> <span class="atlas-str">"student_boukheang@university.edu"</span>,<br>
+    &nbsp;&nbsp;<span style="color:#5c6c75;">name:</span> <span class="atlas-str">"Goat Ronaldo"</span>,<br>
+    &nbsp;&nbsp;<span style="color:#5c6c75;">email:</span> <span class="atlas-str">"student_ronaldo@university.edu"</span>,<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">password:</span> <span class="atlas-str">"$2a$10$yQnM6QOUKq0rQvG2h3JmTe3L9Vp0yW7y..."</span> <span style="color:#e65100;font-weight:600;">// BCRYPT HASH</span>,<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">role:</span> <span class="atlas-str">"user"</span>,<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">phone:</span> <span class="atlas-str">"+85512345678"</span>,<br>
@@ -719,7 +719,7 @@ render_edge(HTML_HEADER + h + HTML_FOOTER, "task8_1_admin_viewalluser.png", heig
 
 # 14. Task 8.2a: Admin Search User (Found)
 t = res_map["Task 8.2a: Admin Search User (Found by Email)"]
-h = make_pm_html(t["title"], "GET", "http://localhost:4000/admin/searchuser?email=student_boukheang@university.edu", None, t["res"]["status"], "OK", t["res"]["body"], auth_token="Bearer [Admin Token]")
+h = make_pm_html(t["title"], "GET", "http://localhost:4000/admin/searchuser?email=student_ronaldo@university.edu", None, t["res"]["status"], "OK", t["res"]["body"], auth_token="Bearer [Admin Token]")
 render_edge(HTML_HEADER + h + HTML_FOOTER, "task8_2_admin_search_found.png", height=620)
 
 # 15. Task 8.2c: Admin Search User (Not Found)
@@ -755,7 +755,7 @@ atlas_update_html = """
     <span style="color:#718096;font-size:12.5px;">Cluster0 &gt; clusterdb &gt; users</span>
   </div>
   <div class="atlas-path">
-    <span>Cluster0</span> &gt; <span>clusterdb</span> &gt; <span style="color:#00684a;">users</span> &gt; <span>Filter: { email: "student_boukheang@university.edu" }</span>
+    <span>Cluster0</span> &gt; <span>clusterdb</span> &gt; <span style="color:#00684a;">users</span> &gt; <span>Filter: { email: "student_ronaldo@university.edu" }</span>
   </div>
   <div class="atlas-tabs">
     <span class="atlas-tab-act">Documents (1)</span>
@@ -767,8 +767,8 @@ atlas_update_html = """
     <div style="font-weight:700;color:#00684a;margin-bottom:8px;">Document: Student Profile AFTER Update (PUT /user/updateprofile)</div>
     {<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">_id:</span> <span class="atlas-id">ObjectId('6aa7b06afbfc8e049c9d5789')</span>,<br>
-    &nbsp;&nbsp;<span style="color:#5c6c75;">name:</span> <span class="atlas-str">"Try Boukheang (Updated Profile)"</span> <span style="color:#00684a;font-weight:700;">// &lt;-- UPDATED NAME</span>,<br>
-    &nbsp;&nbsp;<span style="color:#5c6c75;">email:</span> <span class="atlas-str">"student_boukheang@university.edu"</span>,<br>
+    &nbsp;&nbsp;<span style="color:#5c6c75;">name:</span> <span class="atlas-str">"Goat Ronaldo (Updated Profile)"</span> <span style="color:#00684a;font-weight:700;">// &lt;-- UPDATED NAME</span>,<br>
+    &nbsp;&nbsp;<span style="color:#5c6c75;">email:</span> <span class="atlas-str">"student_ronaldo@university.edu"</span>,<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">password:</span> <span class="atlas-str">"$2a$10$yQnM6QOUKq0rQvG2h3JmTe3L9Vp0yW7y..."</span> <span style="color:#e65100;font-weight:600;">// HASHED</span>,<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">role:</span> <span class="atlas-str">"user"</span>,<br>
     &nbsp;&nbsp;<span style="color:#5c6c75;">phone:</span> <span class="atlas-str">"+85599887766"</span> <span style="color:#00684a;font-weight:700;">// &lt;-- UPDATED PHONE (WAS +85512345678)</span>,<br>
@@ -804,7 +804,7 @@ render_edge(HTML_HEADER + h + HTML_FOOTER, "task10_d_user_access_admin_forbidden
 gh_hd_html = """
 <div style="background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:6px;overflow:hidden;width:860px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
   <div style="background:#161b22;padding:14px 20px;border-bottom:1px solid #30363d;display:flex;align-items:center;gap:12px;">
-    <span style="font-size:18px;color:#58a6ff;font-weight:700;">boukheang / cld_assignment1_usermanagement</span>
+    <span style="font-size:18px;color:#58a6ff;font-weight:700;">goatronaldo / cld_assignment1_usermanagement</span>
     <span style="border:1px solid #30363d;border-radius:12px;padding:2px 10px;font-size:12px;color:#8b949e;font-weight:600;">Public</span>
     <span style="flex:1;"></span>
     <span style="color:#8b949e;font-size:13px;">Branch: <strong style="color:#ffffff;">main</strong></span>
@@ -812,7 +812,7 @@ gh_hd_html = """
   <table style="width:100%;border-collapse:collapse;font-size:13.5px;">
     <tr style="border-bottom:1px solid #21262d;background:#161b22;">
       <td colspan="3" style="padding:10px 18px;color:#8b949e;font-size:12.5px;">
-        <span style="color:#58a6ff;font-weight:700;">boukheang</span> feat: complete Role-Based User Management System using Microservices API Gateway NodeJS MongoDB (Tasks 1-11)
+        <span style="color:#58a6ff;font-weight:700;">goatronaldo</span> feat: complete Role-Based User Management System using Microservices API Gateway NodeJS MongoDB (Tasks 1-11)
       </td>
     </tr>
     <tr style="border-bottom:1px solid #21262d;"><td style="padding:9px 18px;"><span style="color:#58a6ff;margin-right:10px;">📁</span><strong>APIGateway_Microservice</strong></td><td style="color:#7d8590;">Add API Gateway with JWT verification and RBAC routing</td><td style="color:#7d8590;text-align:right;padding-right:18px;">Just now</td></tr>

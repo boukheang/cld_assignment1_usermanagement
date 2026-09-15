@@ -230,14 +230,14 @@ t9_mongo_html = """
   </div>
   <div class="mongo-header">
     <span class="mongo-title">MongoDB Atlas: clusterdb &gt; users</span>
-    <span class="mongo-sub">Filter: { email: "student_boukheang@university.edu" } | Status: Updated Successfully</span>
+    <span class="mongo-sub">Filter: { email: "student_ronaldo@university.edu" } | Status: Updated Successfully</span>
   </div>
   <div class="mongo-card">
     <div style="color:#00ed64;font-weight:bold;margin-bottom:8px;">Document: Student Profile AFTER Update (PUT /user/updateprofile)</div>
     {<br>
     &nbsp;&nbsp;<span class="json-key">"_id"</span>: <span style="color:#61afef;">ObjectId("6aa7b06afbfc8e049c9d5789")</span>,<br>
-    &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-str">"Try Boukheang (Updated Profile)"</span> <span style="color:#00ed64;font-size:11px;">&lt;-- UPDATED</span>,<br>
-    &nbsp;&nbsp;<span class="json-key">"email"</span>: <span class="json-str">"student_boukheang@university.edu"</span>,<br>
+    &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-str">"Goat Ronaldo (Updated Profile)"</span> <span style="color:#00ed64;font-size:11px;">&lt;-- UPDATED</span>,<br>
+    &nbsp;&nbsp;<span class="json-key">"email"</span>: <span class="json-str">"student_ronaldo@university.edu"</span>,<br>
     &nbsp;&nbsp;<span class="json-key">"password"</span>: <span class="json-str">"$2a$10$yQnM6QOUKq0rQvG2h3JmTe3L9Vp..."</span> <span class="cmt">// HASHED WITH BCRYPT</span>,<br>
     &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-str">"user"</span>,<br>
     &nbsp;&nbsp;<span class="json-key">"phone"</span>: <span class="json-str">"+85599887766"</span> <span style="color:#00ed64;font-size:11px;">&lt;-- UPDATED FROM +85512345678</span>,<br>
@@ -258,10 +258,10 @@ gh_html = """
       <div class="traffic-light min"></div>
       <div class="traffic-light max"></div>
     </div>
-    <div class="window-title">GitHub - boukheang / cld_assignment1_usermanagement</div>
+    <div class="window-title">GitHub - goatronaldo / cld_assignment1_usermanagement</div>
   </div>
   <div class="gh-header">
-    <span class="gh-repo-title">boukheang / cld_assignment1_usermanagement</span>
+    <span class="gh-repo-title">goatronaldo / cld_assignment1_usermanagement</span>
     <span class="gh-badge">Public</span>
     <span style="flex:1;"></span>
     <span style="color:#8b949e;font-size:12px;">Branch: <strong style="color:#c9d1d9;">main</strong></span>
@@ -269,7 +269,7 @@ gh_html = """
   <table class="gh-table">
     <tr class="gh-tr">
       <td class="gh-td" colspan="3" style="background:#161b22;color:#8b949e;font-size:12px;">
-        <span style="color:#58a6ff;font-weight:600;">boukheang</span> feat: complete Role-Based User Management System using Microservices API Gateway NodeJS MongoDB (Tasks 1-11)
+        <span style="color:#58a6ff;font-weight:600;">goatronaldo</span> feat: complete Role-Based User Management System using Microservices API Gateway NodeJS MongoDB (Tasks 1-11)
       </td>
     </tr>
     <tr class="gh-tr">

@@ -523,8 +523,8 @@ mongo_html = """
     <div style="color:#00ed64;font-weight:bold;margin-bottom:6px;">Document 1: Student User (Password Hashed with bcrypt)</div>
     {<br>
     &nbsp;&nbsp;<span class="json-key">"_id"</span>: <span style="color:#61afef;">ObjectId("6aa7b06afbfc8e049c9d5789")</span>,<br>
-    &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-str">"Try Boukheang"</span>,<br>
-    &nbsp;&nbsp;<span class="json-key">"email"</span>: <span class="json-str">"student_boukheang@university.edu"</span>,<br>
+    &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-str">"Goat Ronaldo"</span>,<br>
+    &nbsp;&nbsp;<span class="json-key">"email"</span>: <span class="json-str">"student_ronaldo@university.edu"</span>,<br>
     &nbsp;&nbsp;<span class="json-key">"password"</span>: <span class="json-str">"$2a$10$yQnM6QOUKq0rQvG2h3JmTe..."</span> <span class="cmt">// HASHED</span>,<br>
     &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-str">"user"</span>,<br>
     &nbsp;&nbsp;<span class="json-key">"phone"</span>: <span class="json-str">"+85512345678"</span>,<br>
@@ -576,7 +576,7 @@ render_html_to_png(HTML_HEADER + html + HTML_FOOTER, "task8_1_admin_viewalluser.
 
 # 13. Task 8.2a: Admin Search User (Found)
 t = res_map["Task 8.2a: Admin Search User (Found by Email)"]
-html = make_postman_card(t["title"], "GET", "http://localhost:4000/admin/searchuser?email=student_boukheang@university.edu", None, t["res"]["status"], "OK", t["res"]["body"], auth_header="Bearer [Admin Token]")
+html = make_postman_card(t["title"], "GET", "http://localhost:4000/admin/searchuser?email=student_ronaldo@university.edu", None, t["res"]["status"], "OK", t["res"]["body"], auth_header="Bearer [Admin Token]")
 render_html_to_png(HTML_HEADER + html + HTML_FOOTER, "task8_2_admin_search_found.png", height=700)
 
 # 14. Task 8.2c: Admin Search User (Not Found)

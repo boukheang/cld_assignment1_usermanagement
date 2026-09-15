@@ -1,7 +1,7 @@
 # Role-Based User Management System Using Microservices API Gateway, NodeJS & MongoDB
 
 **Course:** CLD 376 - Cloud Native Development  
-**Student:** Try Boukheang (ID: 2024476)  
+**Student:** Goat Ronaldo (ID: 2024476)  
 **Assignment:** 01. Role-Based User Management System Using Microservices API Gateway NodeJS MongoDB  
 
 ---
@@ -46,7 +46,7 @@ API GATEWAY (:4000) ──[JWT & Role Verification]
 ```json
 {
   "_id": "ObjectId(...)",
-  "name": "Try Boukheang",
+  "name": "Goat Ronaldo",
   "email": "student@university.edu",
   "password": "$2a$10$hashed_password_with_bcrypt...",
   "role": "user",
@@ -67,7 +67,7 @@ API GATEWAY (:4000) ──[JWT & Role Verification]
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/boukheang/cld_assignment1_usermanagement.git
+git clone https://github.com/goatronaldo/cld_assignment1_usermanagement.git
 cd cld_assignment1_usermanagement
 
 # Install dependencies
@@ -107,7 +107,7 @@ node test_suite.js
 - **Body:**
 ```json
 {
-  "name": "Try Boukheang",
+  "name": "Goat Ronaldo",
   "email": "student@university.edu",
   "password": "SecurePassword123!",
   "role": "user",
@@ -131,7 +131,7 @@ node test_suite.js
 
 ### 3. Admin Operations (Requires Admin Bearer Token)
 - **View All Users:** `GET http://localhost:4000/admin/viewalluser`
-- **Search User by Query:** `GET http://localhost:4000/admin/searchuser?email=student@university.edu` or `?name=Boukheang`
+- **Search User by Query:** `GET http://localhost:4000/admin/searchuser?email=student@university.edu` or `?name=Ronaldo`
 - **Delete User:** `DELETE http://localhost:4000/admin/deluser?email=student@university.edu`
 
 ### 4. User Profile Operations (Requires User Bearer Token)

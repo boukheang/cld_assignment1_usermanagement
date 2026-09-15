@@ -41,7 +41,7 @@ def add_header_block():
     p_student = doc.add_paragraph()
     p_student.paragraph_format.space_before = Pt(4)
     p_student.paragraph_format.space_after = Pt(10)
-    r3 = p_student.add_run("Try Boukheang\n")
+    r3 = p_student.add_run("Goat Ronaldo\n")
     set_run_font(r3, "Calibri", 13, bold=True, color_rgb=(0, 0, 0))
     r4 = p_student.add_run("ID: 2024476\n")
     set_run_font(r4, "Calibri", 11, bold=False, color_rgb=(60, 60, 60))
@@ -401,7 +401,7 @@ add_image_with_caption(
 # 18. TASK 9C
 add_heading_1("Task 9 – MongoDB User Profile After Update")
 add_body_p(
-    "MongoDB Atlas collection inspection confirming the profile was modified in the database: name changed to 'Try Boukheang (Updated Profile)', "
+    "MongoDB Atlas collection inspection confirming the profile was modified in the database: name changed to 'Goat Ronaldo (Updated Profile)', "
     "phone changed to '+85599887766', and updatedAt timestamp automatically refreshed.",
     bold_lead="Database Verification After Update:"
 )
@@ -469,12 +469,12 @@ add_body_p(
 p_link = doc.add_paragraph()
 r_link_label = p_link.add_run("Public GitHub Repository URL: ")
 set_run_font(r_link_label, "Calibri", 11, bold=True, color_rgb=(0, 51, 102))
-r_url = p_link.add_run("https://github.com/boukheang/cld_assignment1_usermanagement.git")
+r_url = p_link.add_run("https://github.com/goatronaldo/cld_assignment1_usermanagement.git")
 set_run_font(r_url, "Calibri", 11, bold=True, color_rgb=(0, 102, 204))
 
 add_image_with_caption(
     "task11_github_repo.png",
-    "Evidence 22: GitHub Web View - Public repository boukheang/cld_assignment1_usermanagement showing the 5 microservices and project files."
+    "Evidence 22: GitHub Web View - Public repository goatronaldo/cld_assignment1_usermanagement showing the 5 microservices and project files."
 )
 
 # Save DOCX files

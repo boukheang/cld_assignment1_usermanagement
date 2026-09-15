@@ -61,8 +61,8 @@ async function runTests() {
       headers: { 'Content-Type': 'application/json' }
     },
     {
-      name: 'Try Boukheang',
-      email: 'student_boukheang@university.edu',
+      name: 'Goat Ronaldo',
+      email: 'student_ronaldo@university.edu',
       password: 'StudentSecurePass123!',
       role: 'user',
       phone: '+85512345678'
@@ -102,7 +102,7 @@ async function runTests() {
     },
     {
       name: 'Duplicate Account',
-      email: 'student_boukheang@university.edu',
+      email: 'student_ronaldo@university.edu',
       password: 'AnotherPassword',
       role: 'user',
       phone: '+85500000000'
@@ -122,7 +122,7 @@ async function runTests() {
       headers: { 'Content-Type': 'application/json' }
     },
     {
-      email: 'student_boukheang@university.edu',
+      email: 'student_ronaldo@university.edu',
       password: 'StudentSecurePass123!',
       role: 'user'
     }
@@ -160,7 +160,7 @@ async function runTests() {
       headers: { 'Content-Type': 'application/json' }
     },
     {
-      email: 'student_boukheang@university.edu',
+      email: 'student_ronaldo@university.edu',
       password: 'WrongPassword456',
       role: 'user'
     }
@@ -178,7 +178,7 @@ async function runTests() {
       headers: { 'Content-Type': 'application/json' }
     },
     {
-      email: 'student_boukheang@university.edu',
+      email: 'student_ronaldo@university.edu',
       password: 'StudentSecurePass123!',
       role: 'admin'
     }
@@ -268,7 +268,7 @@ async function runTests() {
     {
       hostname: 'localhost',
       port: 4000,
-      path: '/admin/searchuser?email=student_boukheang@university.edu',
+      path: '/admin/searchuser?email=student_ronaldo@university.edu',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${adminToken}` }
     }
@@ -281,7 +281,7 @@ async function runTests() {
     {
       hostname: 'localhost',
       port: 4000,
-      path: '/admin/searchuser?name=Boukheang',
+      path: '/admin/searchuser?name=Ronaldo',
       method: 'GET',
       headers: { 'Authorization': `Bearer ${adminToken}` }
     }
@@ -362,7 +362,7 @@ async function runTests() {
       }
     },
     {
-      name: 'Try Boukheang (Updated Profile)',
+      name: 'Goat Ronaldo (Updated Profile)',
       phone: '+85599887766'
     }
   );

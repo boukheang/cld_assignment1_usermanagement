@@ -12,8 +12,8 @@
       }
     },
     "reqBody": {
-      "name": "Try Boukheang",
-      "email": "student_boukheang@university.edu",
+      "name": "Goat Ronaldo",
+      "email": "student_ronaldo@university.edu",
       "password": "StudentSecurePass123!",
       "role": "user",
       "phone": "+85512345678"
@@ -34,15 +34,15 @@
         "message": "User registered successfully in MongoDB database.",
         "user": {
           "_id": "6aa7b06afbfc8e049c9d5789",
-          "name": "Try Boukheang",
-          "email": "student_boukheang@university.edu",
+          "name": "Goat Ronaldo",
+          "email": "student_ronaldo@university.edu",
           "role": "user",
           "phone": "+85512345678",
           "createdAt": "2026-09-14T08:29:30.779Z",
           "updatedAt": "2026-09-14T08:29:30.779Z"
         }
       },
-      "raw": "{\"success\":true,\"message\":\"User registered successfully in MongoDB database.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\"}}"
+      "raw": "{\"success\":true,\"message\":\"User registered successfully in MongoDB database.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\"}}"
     }
   },
   {
@@ -105,7 +105,7 @@
     },
     "reqBody": {
       "name": "Duplicate Account",
-      "email": "student_boukheang@university.edu",
+      "email": "student_ronaldo@university.edu",
       "password": "AnotherPassword",
       "role": "user",
       "phone": "+85500000000"
@@ -141,7 +141,7 @@
       }
     },
     "reqBody": {
-      "email": "student_boukheang@university.edu",
+      "email": "student_ronaldo@university.edu",
       "password": "StudentSecurePass123!",
       "role": "user"
     },
@@ -162,13 +162,13 @@
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYTdiMDZhZmJmYzhlMDQ5YzlkNTc4OSIsImVtYWlsIjoic3R1ZGVudF9ib3VraGVhbmdAdW5pdmVyc2l0eS5lZHUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc4OTM3NDU3MiwiZXhwIjoxNzg5NDYwOTcyfQ.eNen5OUS9cQXrZyDbOnvrEVEBDsvRCVYbqGx_ppJfJQ",
         "user": {
           "_id": "6aa7b06afbfc8e049c9d5789",
-          "name": "Try Boukheang",
-          "email": "student_boukheang@university.edu",
+          "name": "Goat Ronaldo",
+          "email": "student_ronaldo@university.edu",
           "role": "user",
           "phone": "+85512345678"
         }
       },
-      "raw": "{\"success\":true,\"message\":\"Login successful. JWT token generated.\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYTdiMDZhZmJmYzhlMDQ5YzlkNTc4OSIsImVtYWlsIjoic3R1ZGVudF9ib3VraGVhbmdAdW5pdmVyc2l0eS5lZHUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc4OTM3NDU3MiwiZXhwIjoxNzg5NDYwOTcyfQ.eNen5OUS9cQXrZyDbOnvrEVEBDsvRCVYbqGx_ppJfJQ\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\"}}"
+      "raw": "{\"success\":true,\"message\":\"Login successful. JWT token generated.\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYTdiMDZhZmJmYzhlMDQ5YzlkNTc4OSIsImVtYWlsIjoic3R1ZGVudF9ib3VraGVhbmdAdW5pdmVyc2l0eS5lZHUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc4OTM3NDU3MiwiZXhwIjoxNzg5NDYwOTcyfQ.eNen5OUS9cQXrZyDbOnvrEVEBDsvRCVYbqGx_ppJfJQ\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\"}}"
     }
   },
   {
@@ -227,7 +227,7 @@
       }
     },
     "reqBody": {
-      "email": "student_boukheang@university.edu",
+      "email": "student_ronaldo@university.edu",
       "password": "WrongPassword456",
       "role": "user"
     },
@@ -262,7 +262,7 @@
       }
     },
     "reqBody": {
-      "email": "student_boukheang@university.edu",
+      "email": "student_ronaldo@university.edu",
       "password": "StudentSecurePass123!",
       "role": "admin"
     },
@@ -473,8 +473,8 @@
           },
           {
             "_id": "6aa7b06afbfc8e049c9d5789",
-            "name": "Try Boukheang",
-            "email": "student_boukheang@university.edu",
+            "name": "Goat Ronaldo",
+            "email": "student_ronaldo@university.edu",
             "role": "user",
             "phone": "+85512345678",
             "createdAt": "2026-09-14T08:29:30.779Z",
@@ -483,7 +483,7 @@
           }
         ]
       },
-      "raw": "{\"success\":true,\"message\":\"Retrieved all users information successfully.\",\"totalUsers\":2,\"users\":[{\"_id\":\"6aa7b06bfbfc8e049c9d578c\",\"name\":\"University Registrar Admin\",\"email\":\"admin_office@university.edu\",\"role\":\"admin\",\"phone\":\"+85598765432\",\"createdAt\":\"2026-09-14T08:29:31.485Z\",\"updatedAt\":\"2026-09-14T08:29:31.485Z\",\"__v\":0},{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}]}"
+      "raw": "{\"success\":true,\"message\":\"Retrieved all users information successfully.\",\"totalUsers\":2,\"users\":[{\"_id\":\"6aa7b06bfbfc8e049c9d578c\",\"name\":\"University Registrar Admin\",\"email\":\"admin_office@university.edu\",\"role\":\"admin\",\"phone\":\"+85598765432\",\"createdAt\":\"2026-09-14T08:29:31.485Z\",\"updatedAt\":\"2026-09-14T08:29:31.485Z\",\"__v\":0},{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}]}"
     }
   },
   {
@@ -492,7 +492,7 @@
     "reqOpts": {
       "hostname": "localhost",
       "port": 4000,
-      "path": "/admin/searchuser?email=student_boukheang@university.edu",
+      "path": "/admin/searchuser?email=student_ronaldo@university.edu",
       "method": "GET",
       "headers": {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYTdiMDZiZmJmYzhlMDQ5YzlkNTc4YyIsImVtYWlsIjoiYWRtaW5fb2ZmaWNlQHVuaXZlcnNpdHkuZWR1Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg5Mzc0NTczLCJleHAiOjE3ODk0NjA5NzN9.eWVXP1r2Ta7KFwSyixGizB5Ge6dVgwSRfbwAW-at83Y"
@@ -516,8 +516,8 @@
         "users": [
           {
             "_id": "6aa7b06afbfc8e049c9d5789",
-            "name": "Try Boukheang",
-            "email": "student_boukheang@university.edu",
+            "name": "Goat Ronaldo",
+            "email": "student_ronaldo@university.edu",
             "role": "user",
             "phone": "+85512345678",
             "createdAt": "2026-09-14T08:29:30.779Z",
@@ -526,7 +526,7 @@
           }
         ]
       },
-      "raw": "{\"success\":true,\"message\":\"Found 1 user(s).\",\"count\":1,\"users\":[{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}]}"
+      "raw": "{\"success\":true,\"message\":\"Found 1 user(s).\",\"count\":1,\"users\":[{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}]}"
     }
   },
   {
@@ -535,7 +535,7 @@
     "reqOpts": {
       "hostname": "localhost",
       "port": 4000,
-      "path": "/admin/searchuser?name=Boukheang",
+      "path": "/admin/searchuser?name=Ronaldo",
       "method": "GET",
       "headers": {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhYTdiMDZiZmJmYzhlMDQ5YzlkNTc4YyIsImVtYWlsIjoiYWRtaW5fb2ZmaWNlQHVuaXZlcnNpdHkuZWR1Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg5Mzc0NTczLCJleHAiOjE3ODk0NjA5NzN9.eWVXP1r2Ta7KFwSyixGizB5Ge6dVgwSRfbwAW-at83Y"
@@ -559,8 +559,8 @@
         "users": [
           {
             "_id": "6aa7b06afbfc8e049c9d5789",
-            "name": "Try Boukheang",
-            "email": "student_boukheang@university.edu",
+            "name": "Goat Ronaldo",
+            "email": "student_ronaldo@university.edu",
             "role": "user",
             "phone": "+85512345678",
             "createdAt": "2026-09-14T08:29:30.779Z",
@@ -569,7 +569,7 @@
           }
         ]
       },
-      "raw": "{\"success\":true,\"message\":\"Found 1 user(s).\",\"count\":1,\"users\":[{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}]}"
+      "raw": "{\"success\":true,\"message\":\"Found 1 user(s).\",\"count\":1,\"users\":[{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}]}"
     }
   },
   {
@@ -712,8 +712,8 @@
         "message": "User profile retrieved successfully.",
         "user": {
           "_id": "6aa7b06afbfc8e049c9d5789",
-          "name": "Try Boukheang",
-          "email": "student_boukheang@university.edu",
+          "name": "Goat Ronaldo",
+          "email": "student_ronaldo@university.edu",
           "role": "user",
           "phone": "+85512345678",
           "createdAt": "2026-09-14T08:29:30.779Z",
@@ -721,7 +721,7 @@
           "__v": 0
         }
       },
-      "raw": "{\"success\":true,\"message\":\"User profile retrieved successfully.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}}"
+      "raw": "{\"success\":true,\"message\":\"User profile retrieved successfully.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85512345678\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:30.779Z\",\"__v\":0}}"
     }
   },
   {
@@ -738,7 +738,7 @@
       }
     },
     "reqBody": {
-      "name": "Try Boukheang (Updated Profile)",
+      "name": "Goat Ronaldo (Updated Profile)",
       "phone": "+85599887766"
     },
     "res": {
@@ -757,8 +757,8 @@
         "message": "User profile updated successfully.",
         "user": {
           "_id": "6aa7b06afbfc8e049c9d5789",
-          "name": "Try Boukheang (Updated Profile)",
-          "email": "student_boukheang@university.edu",
+          "name": "Goat Ronaldo (Updated Profile)",
+          "email": "student_ronaldo@university.edu",
           "role": "user",
           "phone": "+85599887766",
           "createdAt": "2026-09-14T08:29:30.779Z",
@@ -766,7 +766,7 @@
           "__v": 0
         }
       },
-      "raw": "{\"success\":true,\"message\":\"User profile updated successfully.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang (Updated Profile)\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85599887766\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:36.223Z\",\"__v\":0}}"
+      "raw": "{\"success\":true,\"message\":\"User profile updated successfully.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo (Updated Profile)\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85599887766\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:36.223Z\",\"__v\":0}}"
     }
   },
   {
@@ -797,8 +797,8 @@
         "message": "User profile retrieved successfully.",
         "user": {
           "_id": "6aa7b06afbfc8e049c9d5789",
-          "name": "Try Boukheang (Updated Profile)",
-          "email": "student_boukheang@university.edu",
+          "name": "Goat Ronaldo (Updated Profile)",
+          "email": "student_ronaldo@university.edu",
           "role": "user",
           "phone": "+85599887766",
           "createdAt": "2026-09-14T08:29:30.779Z",
@@ -806,7 +806,7 @@
           "__v": 0
         }
       },
-      "raw": "{\"success\":true,\"message\":\"User profile retrieved successfully.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Try Boukheang (Updated Profile)\",\"email\":\"student_boukheang@university.edu\",\"role\":\"user\",\"phone\":\"+85599887766\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:36.223Z\",\"__v\":0}}"
+      "raw": "{\"success\":true,\"message\":\"User profile retrieved successfully.\",\"user\":{\"_id\":\"6aa7b06afbfc8e049c9d5789\",\"name\":\"Goat Ronaldo (Updated Profile)\",\"email\":\"student_ronaldo@university.edu\",\"role\":\"user\",\"phone\":\"+85599887766\",\"createdAt\":\"2026-09-14T08:29:30.779Z\",\"updatedAt\":\"2026-09-14T08:29:36.223Z\",\"__v\":0}}"
     }
   }
 ]
