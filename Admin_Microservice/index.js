@@ -11,8 +11,8 @@ app.use(express.json());
 
 const PORT = process.env.ADMIN_PORT || 5003;
 
-// TASK 8.1: GET /admin/searchuser - Search user by name or email
-app.get(['/admin/searchuser', '/searchuser'], async (req, res) => {
+// TASK 8.1: GET /searchuser (Routed from Gateway /admin/searchuser) - Search user by name or email
+app.get('/searchuser', async (req, res) => {
   console.log("--> ADMIN MICROSERVICE: Search user request received", req.query);
   try {
     const { name, email } = req.query;
@@ -55,8 +55,8 @@ app.get(['/admin/searchuser', '/searchuser'], async (req, res) => {
   }
 });
 
-// TASK 8.2: GET /admin/viewalluser - View all users' information
-app.get(['/admin/viewalluser', '/viewalluser'], async (req, res) => {
+// TASK 8.2: GET /viewalluser (Routed from Gateway /admin/viewalluser) - View all users' information
+app.get('/viewalluser', async (req, res) => {
   console.log("--> ADMIN MICROSERVICE: View all users request received");
   try {
     const users = await User.find().select('-password').sort({ createdAt: -1 });
@@ -76,8 +76,8 @@ app.get(['/admin/viewalluser', '/viewalluser'], async (req, res) => {
   }
 });
 
-// TASK 8.3: DELETE /admin/deluser - Delete a user by emailid
-app.delete(['/admin/deluser', '/deluser'], async (req, res) => {
+// TASK 8.3: DELETE /deluser (Routed from Gateway /admin/deluser) - Delete a user by emailid
+app.delete('/deluser', async (req, res) => {
   console.log("--> ADMIN MICROSERVICE: Delete user request received", req.query, req.body);
   try {
     const email = req.query.email || (req.body && req.body.email);

@@ -14,9 +14,9 @@ app.use(express.json());
 const PORT = process.env.LOGIN_PORT || 5002;
 const JWT_SECRET = process.env.JWT_SECRET || '347186591486#^%%ABCF*##GHE';
 
-// TASK 6: POST /auth/login
+// TASK 6: POST /login (Routed from Gateway /auth/login)
 // Accepts { email, password, role }
-app.post(['/auth/login', '/login'], async (req, res) => {
+app.post('/login', async (req, res) => {
   console.log("--> LOGIN MICROSERVICE: Login attempt received");
   try {
     const { email, password, role } = req.body;

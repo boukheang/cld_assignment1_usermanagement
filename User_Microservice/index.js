@@ -11,8 +11,8 @@ app.use(express.json());
 
 const PORT = process.env.USER_PORT || 5004;
 
-// TASK 9.1: GET /user/viewprofile - View own profile
-app.get(['/user/viewprofile', '/viewprofile'], async (req, res) => {
+// TASK 9.1: GET /viewprofile (Routed from Gateway /user/viewprofile) - View own profile
+app.get('/viewprofile', async (req, res) => {
   console.log("--> USER MICROSERVICE: View profile request received");
   try {
     // Authenticated user identity from API Gateway header, query, or body
@@ -50,8 +50,8 @@ app.get(['/user/viewprofile', '/viewprofile'], async (req, res) => {
   }
 });
 
-// TASK 9.2: PUT /user/updateprofile - Update own profile
-app.put(['/user/updateprofile', '/updateprofile'], async (req, res) => {
+// TASK 9.2: PUT /updateprofile (Routed from Gateway /user/updateprofile) - Update own profile
+app.put('/updateprofile', async (req, res) => {
   console.log("--> USER MICROSERVICE: Update profile request received", req.body);
   try {
     const userEmail = req.headers['x-user-email'] || (req.body && req.body.email);

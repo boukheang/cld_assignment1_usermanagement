@@ -12,9 +12,8 @@ app.use(express.json());
 
 const PORT = process.env.REGISTRATION_PORT || 5001;
 
-// TASK 5: POST /register/userregister
-// Supports both direct path and Gateway routed path
-app.post(['/register/userregister', '/userregister'], async (req, res) => {
+// TASK 5: POST /userregister (Routed from Gateway /register/userregister)
+app.post('/userregister', async (req, res) => {
   console.log("--> REGISTRATION MICROSERVICE: Registration request received");
   try {
     const { name, email, password, role, phone } = req.body;
