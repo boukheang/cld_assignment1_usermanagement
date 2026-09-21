@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // Database Connection URL
-const uri = process.env.MONGODB_URI || "mongodb://fromheaventohelliamthegod_db_user:kp0m6aZ5uUhLiuoo@ac-v0qr9ql-shard-00-00.bziazoz.mongodb.net:27017,ac-v0qr9ql-shard-00-01.bziazoz.mongodb.net:27017,ac-v0qr9ql-shard-00-02.bziazoz.mongodb.net:27017/UserData?ssl=true&replicaSet=atlas-cvnewq-shard-0&authSource=admin&appName=Cluster0";
-
+const uri = process.env.MONGODB_URI || "";
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
 async function run() {
