@@ -1,128 +1,158 @@
 const express = require('express');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
-
-const dbconnect = require('./dbconnect.js');
-const User = require('./user_schema.js');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.ADMIN_PORT || 5003;
+const PORT = process.env.PORT || 5003;
+const JWT_SECRET = process.env.JWT_SECRETE || process.env.JWT_SECRET || '347186591486#^%%ABCF*##GHE';
 
-// TASK 8.1: GET /searchuser (Routed from Gateway /admin/searchuser) - Search user by name or email
-app.get('/searchuser', async (req, res) => {
-  console.log("--> ADMIN MICROSERVICE: Search user request received", req.query);
-  try {
-    const { name, email } = req.query;
+const PersonModel = require('./person_schema.js');
+const dbconnect = require('./dbconnect.js');
 
-    if (!name && !email) {
-      return res.status(400).json({
-        success: false,
-        message: "Search query required: please provide 'name' or 'email' as a query parameter."
-      });
+// ============================================
+// JWT + ADMIN AUTHORIZATION MIDDLEWARE
+// ============================================
+function verifyAdmin(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).json({
+            message: "Access denied. Token is required."
+        });
     }
 
-    const query = {};
-    if (email) {
-      query.email = email.toLowerCase().trim();
-    } else if (name) {
-      query.name = { $regex: name.trim(), $options: 'i' }; // case-insensitive regex
+    let token = authHeader;
+    if (authHeader.startsWith('Bearer ') || authHeader.startsWith('bearer ')) {
+        token = authHeader.substring(7).trim();
+    } else if (authHeader.includes(' ')) {
+        token = authHeader.split(' ')[1].trim();
     }
 
-    const users = await User.find(query).select('-password');
-
-    if (!users || users.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found with the specified search criteria."
-      });
+    if (!token) {
+        return res.status(401).json({
+            message: "Invalid token format."
+        });
     }
 
-    return res.status(200).json({
-      success: true,
-      message: `Found ${users.length} user(s).`,
-      count: users.length,
-      users: users
-    });
-  } catch (error) {
-    console.error("Error searching user:", error.message);
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Internal server error during search."
-    });
-  }
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        if (decoded.role !== 'admin') {
+            return res.status(403).json({
+                message: "Access denied. Admin only."
+            });
+        }
+        req.user = decoded;
+        next();
+    } catch (err) {
+        return res.status(401).json({
+            message: "Invalid or expired token."
+        });
+    }
+}
+
+// ============================================
+// TASK 8.1: SEARCH USER API (Clean single endpoint)
+// GET /searchuser?email=... or ?name=...
+// ============================================
+app.get('/searchuser', verifyAdmin, async (req, res) => {
+    try {
+        const { email, name } = req.query;
+
+        if (!email && !name) {
+            return res.status(400).json({
+                message: "Email or Name query parameter is required."
+            });
+        }
+
+        const query = {};
+        if (email) {
+            query.email = email.toLowerCase().trim();
+        } else if (name) {
+            query.name = { $regex: name.trim(), $options: 'i' };
+        }
+
+        const user = await PersonModel.find(query).select('-password');
+
+        if (!user || user.length === 0) {
+            return res.status(404).json({
+                message: "User not found."
+            });
+        }
+
+        return res.status(200).json({
+            message: "User found successfully",
+            count: user.length,
+            user: user.length === 1 ? user[0] : user
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message || "Error searching user."
+        });
+    }
 });
 
-// TASK 8.2: GET /viewalluser (Routed from Gateway /admin/viewalluser) - View all users' information
-app.get('/viewalluser', async (req, res) => {
-  console.log("--> ADMIN MICROSERVICE: View all users request received");
-  try {
-    const users = await User.find().select('-password').sort({ createdAt: -1 });
+// ============================================
+// TASK 8.2: VIEW ALL USERS API (Clean single endpoint)
+// GET /viewalluser
+// ============================================
+app.get('/viewalluser', verifyAdmin, async (req, res) => {
+    try {
+        const users = await PersonModel.find().select('-password').sort({ createdAt: -1 });
 
-    return res.status(200).json({
-      success: true,
-      message: "Retrieved all users information successfully.",
-      totalUsers: users.length,
-      users: users
-    });
-  } catch (error) {
-    console.error("Error viewing all users:", error.message);
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Internal server error while retrieving users."
-    });
-  }
+        return res.status(200).json({
+            message: "Retrieved all users information successfully.",
+            totalUsers: users.length,
+            users: users
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message || "Error retrieving users."
+        });
+    }
 });
 
-// TASK 8.3: DELETE /deluser (Routed from Gateway /admin/deluser) - Delete a user by emailid
-app.delete('/deluser', async (req, res) => {
-  console.log("--> ADMIN MICROSERVICE: Delete user request received", req.query, req.body);
-  try {
-    const email = req.query.email || (req.body && req.body.email);
+// ============================================
+// TASK 8.3: DELETE USER API (Clean single endpoint)
+// DELETE /deluser?email=... or JSON body { email: ... }
+// ============================================
+app.delete('/deluser', verifyAdmin, async (req, res) => {
+    try {
+        const email = req.query.email || (req.body && req.body.email);
 
-    if (!email) {
-      return res.status(400).json({
-        success: false,
-        message: "User email is required to delete a user (provide via ?email=... query or JSON body)."
-      });
+        if (!email) {
+            return res.status(400).json({
+                message: "Email is required to delete a user."
+            });
+        }
+
+        const normalizedEmail = email.toLowerCase().trim();
+        const deletedUser = await PersonModel.findOneAndDelete({ email: normalizedEmail });
+
+        if (!deletedUser) {
+            return res.status(404).json({
+                message: `User '${normalizedEmail}' not found.`
+            });
+        }
+
+        return res.status(200).json({
+            message: "User deleted successfully.",
+            deletedUser: {
+                _id: deletedUser._id,
+                name: deletedUser.name,
+                email: deletedUser.email,
+                role: deletedUser.role
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message || "Error deleting user."
+        });
     }
-
-    const normalizedEmail = email.toLowerCase().trim();
-    const deletedUser = await User.findOneAndDelete({ email: normalizedEmail });
-
-    if (!deletedUser) {
-      return res.status(404).json({
-        success: false,
-        message: `Cannot delete: User with email '${normalizedEmail}' not found.`
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: `User '${normalizedEmail}' has been successfully deleted from the database.`,
-      deletedUser: {
-        _id: deletedUser._id,
-        name: deletedUser.name,
-        email: deletedUser.email,
-        role: deletedUser.role
-      }
-    });
-  } catch (error) {
-    console.error("Error deleting user:", error.message);
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Internal server error during user deletion."
-    });
-  }
-});
-
-// Health check endpoint
-app.get(['/', '/health'], (req, res) => {
-  res.json({ status: "Admin Microservice is running", port: PORT });
 });
 
 app.listen(PORT, () => {
-  console.log(`Admin Microservice Server Started at Port No: ${PORT}`);
+    console.log(`ADMIN Service Started at Port No: ${PORT}`);
 });

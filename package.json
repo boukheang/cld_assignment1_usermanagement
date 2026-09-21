@@ -2,16 +2,18 @@
   "name": "university-user-management-platform",
   "version": "1.0.0",
   "description": "Central Identity and User Management Platform Using Microservices, API Gateway, Node.js, and MongoDB",
-  "main": "index.js",
+  "main": "APIGateway_Microservice/api-gateway.js",
   "scripts": {
     "start:gateway": "node APIGateway_Microservice/api-gateway.js",
-    "start:register": "node Registration_Microservice/index.js",
-    "start:login": "node Login_Microservice/index.js",
+    "start:register": "node Registration_Microservice/registration.js",
+    "start:auth": "node Authentication_Microservice/authentication-service.js",
+    "start:login": "node Authentication_Microservice/authentication-service.js",
     "start:admin": "node Admin_Microservice/index.js",
     "start:user": "node User_Microservice/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
