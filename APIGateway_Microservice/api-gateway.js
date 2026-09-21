@@ -18,7 +18,7 @@ proxy.on('error', (err, req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.GATEWAY_PORT || process.env.PORT || 4000;
 const JWT_SECRETE = process.env.JWT_SECRETE || '347186591486#^%%ABCF*##GHE';
 
 // TASK 7: Token Validation Middleware

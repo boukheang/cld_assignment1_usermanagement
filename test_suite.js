@@ -5,18 +5,50 @@ async function runTests() {
   console.log('Running End-to-End Verification Test Suite');
   console.log('====================================================\n');
 
-  console.log('1. Starting All 5 Microservices...');
-  const gw = cp.spawn('node', ['APIGateway_Microservice/api-gateway.js'], { cwd: __dirname });
-  const reg = cp.spawn('node', ['Registration_Microservice/registration.js'], { cwd: __dirname });
-  const auth = cp.spawn('node', ['Authentication_Microservice/authentication-service.js'], { cwd: __dirname });
-  const adm = cp.spawn('node', ['Admin_Microservice/index.js'], { cwd: __dirname });
-  const usr = cp.spawn('node', ['User_Microservice/index.js'], { cwd: __dirname });
+  const replicaUri = "mongodb://fromheaventohelliamthegod_db_user:kp0m6aZ5uUhLiuoo@ac-v0qr9ql-shard-00-00.bziazoz.mongodb.net:27017,ac-v0qr9ql-shard-00-01.bziazoz.mongodb.net:27017,ac-v0qr9ql-shard-00-02.bziazoz.mongodb.net:27017/UserData?ssl=true&replicaSet=atlas-cvnewq-shard-0&authSource=admin&appName=Cluster0";
+  const env = { ...process.env, MONGODB_URI: replicaUri };
 
-  // Wait 6 seconds for boot & DB connections
-  await new Promise(r => setTimeout(r, 6000));
+  console.log('1. Starting All 5 Microservices...');
+  const gw = cp.spawn('node', ['APIGateway_Microservice/api-gateway.js'], { cwd: __dirname, env });
+  const reg = cp.spawn('node', ['Registration_Microservice/registration.js'], { cwd: __dirname, env });
+  const auth = cp.spawn('node', ['Authentication_Microservice/authentication-service.js'], { cwd: __dirname, env });
+  const adm = cp.spawn('node', ['Admin_Microservice/index.js'], { cwd: __dirname, env });
+  const usr = cp.spawn('node', ['User_Microservice/index.js'], { cwd: __dirname, env });
+
+  // Stream process output
+  [gw, reg, auth, adm, usr].forEach((p, idx) => {
+    const names = ['gw', 'reg', 'auth', 'adm', 'usr'];
+    p.stdout.on('data', d => console.log(`[${names[idx]}]`, d.toString().trim()));
+    p.stderr.on('data', d => console.error(`[${names[idx]} ERR]`, d.toString().trim()));
+    p.on('error', err => console.error(`[${names[idx]} SPAWN ERR]`, err));
+    p.on('exit', code => console.log(`[${names[idx]} EXIT] code:`, code));
+  });
+
+  function waitForPort(port, timeoutMs = 15000) {
+    return new Promise((resolve, reject) => {
+      const start = Date.now();
+      const check = () => {
+        const net = require('net');
+        const s = net.createConnection(port, '127.0.0.1');
+        s.on('connect', () => { s.destroy(); resolve(); });
+        s.on('error', () => {
+          if (Date.now() - start > timeoutMs) {
+            reject(new Error(`Port ${port} failed to open within ${timeoutMs}ms`));
+          } else {
+            setTimeout(check, 400);
+          }
+        });
+      };
+      check();
+    });
+  }
+
+  console.log('Waiting for ports 4000, 5001, 5002, 5003, 5004 to open...');
+  await Promise.all([4000, 5001, 5002, 5003, 5004].map(p => waitForPort(p)));
+  console.log('All 5 microservice ports are open and listening!\n');
 
   try {
-    const testEmail = `test_e2e_${Date.now()}@university.edu`;
+    const testEmail = `test_suite_${Date.now()}@university.edu`;
 
     // 1. Registration via Gateway
     console.log('\n--- 1. Testing Registration via Gateway (:4000/register/userregister) ---');

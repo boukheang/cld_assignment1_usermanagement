@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.LOGIN_PORT || process.env.AUTH_PORT || 5002;
 const JWT_SECRETE = process.env.JWT_SECRETE || '347186591486#^%%ABCF*##GHE';
 
 const PersonModel = require('./person_schema.js');

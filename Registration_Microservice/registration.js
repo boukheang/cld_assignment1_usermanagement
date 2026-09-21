@@ -100,7 +100,7 @@ const handleRegistration = async (req, res) => {
 app.post('/reg', handleRegistration);
 app.post('/userregister', handleRegistration);
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.REGISTRATION_PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Registration Microservice Server Started at Port No: ${PORT}`);
 });
