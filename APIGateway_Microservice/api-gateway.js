@@ -86,13 +86,13 @@ app.use(['/auth', '/login'], (req, res) => {
 // REDIRECT TO THE ADMIN MICROSERVICE (Port 5003) - Role 'admin' ONLY
 app.use('/admin', authToken, authRole('admin'), (req, res) => {
     console.log(`--> API GATEWAY: Routing ${req.method} ${req.originalUrl} to Admin Microservice (Port 5003)`);
-    proxy.web(req, res, { target: 'http://localhost:5003' });
+    proxy.web(req, res, { target: 'http://100.55.22.91:5003' });
 });
 
 // REDIRECT TO THE USER MICROSERVICE (Port 5004) - Role 'user' ONLY
 app.use('/user', authToken, authRole('user'), (req, res) => {
     console.log(`--> API GATEWAY: Routing ${req.method} ${req.originalUrl} to User Microservice (Port 5004)`);
-    proxy.web(req, res, { target: 'http://localhost:5004' });
+    proxy.web(req, res, { target: 'http://54.165.172.55:5004' });
 });
 
 app.listen(PORT, () => {
